@@ -35,6 +35,16 @@ function completeTask(taskKey) {
     });
 }
 
+// Ta bort uppgiften
+function deleteTask(taskKey) {
+    const taskRef = db.ref(`tasks/${taskKey}`);
+    taskRef.remove((error) => {
+        if (error) {
+            console.log("Error deleting task:", error);
+        }
+    });
+}
+
 // Lägg till lyssnare för formulär-submit
 todoForm.addEventListener("submit", (e) => {
     e.preventDefault();
