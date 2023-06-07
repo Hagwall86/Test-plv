@@ -12,3 +12,32 @@ const firebaseConfig = {
 // Initialisera Firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
+
+// Referenser till HTML-element
+const todoForm = document.getElementById("todoForm");
+const titleInput = document.getElementById("titleInput");
+const descriptionInput = document.getElementById("descriptionInput");
+const dateInput = document.getElementById("dateInput");
+const todoList = document.getElementById("todoList");
+
+// Lägg till lyssnare för formulär-submit
+todoForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    // Hämta värden från formuläret
+    const title = titleInput.value;
+    const description = descriptionInput.value;
+    const date = dateInput.value;
+
+    // Skapa en ny uppgift i databasen
+    const newTaskRef = db.ref("tasks").push();
+    newTaskRef.set({
+        title: title,
+        description: description,
+        date: date,
+        completed: false,
+    });
+
+    // Återställ formuläret
+    todoForm.reset();
+});
