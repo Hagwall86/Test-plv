@@ -1,8 +1,13 @@
+import config from './config.js';
+
+const apiKey = config.apiKey;
+const databaseUrl = config.databaseUrl;
+
 // Firebase-konfiguration (hämtad från ditt Firebase-projekt)
 const firebaseConfig = {
-    apiKey: "AIzaSyAsMCiUcLm97v6yrth166NxJi2PvBsDhUU",
+    apiKey: apiKey,
     authDomain: "plv-projekt.firebaseapp.com",
-    databaseURL: "https://plv-projekt-default-rtdb.europe-west1.firebasedatabase.app",
+    databaseURL: databaseUrl,
     projectId: "plv-projekt",
     storageBucket: "plv-projekt.appspot.com",
     messagingSenderId: "754434030320",
