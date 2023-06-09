@@ -74,18 +74,19 @@ db.ref("tasks").on("value", (snapshot) => {
     snapshot.forEach((childSnapshot) => {
         const task = childSnapshot.val();
         const taskKey = childSnapshot.key;
-
         // Skapa en listrad för varje uppgift
         const taskItem = document.createElement("li");
         taskItem.id = taskKey;
         taskItem.className = "task-item";
+        if (task.completed) {
+            taskItem.classList.add("completed");
+        }
         taskItem.innerHTML = `
         <h3>${task.title}</h3>
         <p>${task.description}</p>
         <p>Due Date: ${task.date}</p>
         <button onclick="completeTask('${taskKey}')">Complete</button>
         <button onclick="deleteTask('${taskKey}')">Delete</button>`;
-
         // Lägg till klass för att indikera om uppgiften är nära slutdatum
         const today = new Date();
         const dueDate = new Date(task.date);
@@ -93,7 +94,7 @@ db.ref("tasks").on("value", (snapshot) => {
             taskItem.classList.add("expired");
             taskItem.innerHTML += `<span class="icon"></span>`
         }
-
+        
         // Lägg till uppgiften i listan
         todoList.appendChild(taskItem);
     });
