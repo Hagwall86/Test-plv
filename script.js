@@ -2,16 +2,21 @@ import config from './config.js';
 
 const apiKey = config.apiKey;
 const databaseUrl = config.databaseUrl;
+const authDomain = config.authDomain;
+const projectId = config.projectId;
+const storageBucket = config.storageBucket;
+const messagingSenderId = config.messagingSenderId;
+const appId = config.appId;
 
 // Firebase-konfiguration (hämtad från ditt Firebase-projekt)
 const firebaseConfig = {
     apiKey: apiKey,
-    authDomain: "plv-projekt.firebaseapp.com",
+    authDomain: authDomain,
     databaseURL: databaseUrl,
-    projectId: "plv-projekt",
-    storageBucket: "plv-projekt.appspot.com",
-    messagingSenderId: "754434030320",
-    appId: "1:754434030320:web:119fffabf4f782d030a035"
+    projectId: projectId,
+    storageBucket: storageBucket,
+    messagingSenderId: messagingSenderId,
+    appId: appId,
 };
 
 // Initialisera Firebase
@@ -50,6 +55,45 @@ function deleteTask(taskKey) {
     });
 }
 
+// Skapa en listrad för varje uppgift
+function createTaskElement(task, taskKey) {
+    const taskItem = document.createElement("li");
+    taskItem.id = taskKey;
+    taskItem.className = "task-item";
+    if (task.completed) {
+        taskItem.classList.add("completed");
+    }
+    taskItem.innerHTML = `
+    <h3>${task.title}</h3>
+    <p>${task.description}</p>
+    <p>Due Date: ${task.date}</p>
+    <button class="complete-button">Complete</button>
+    <button class="delete-button">Delete</button>`;
+
+    // Lägg till klass för att indikera om uppgiften är nära slutdatum
+    const today = new Date();
+    const dueDate = new Date(task.date);
+    if (dueDate <= today) {
+        taskItem.classList.add("expired");
+        taskItem.innerHTML += `<span class="icon"></span>`;
+    }
+
+    // Lägg till uppgiften i listan
+    todoList.appendChild(taskItem);
+
+    // Lyssna på complete-knappen
+    const completeButton = taskItem.querySelector(".complete-button");
+    completeButton.addEventListener("click", () => {
+        completeTask(taskKey);
+    });
+
+    // Lyssna på delete-knappen
+    const deleteButton = taskItem.querySelector(".delete-button");
+    deleteButton.addEventListener("click", () => {
+        deleteTask(taskKey);
+    });
+}
+
 // Lägg till lyssnare för formulär-submit
 todoForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -79,28 +123,7 @@ db.ref("tasks").on("value", (snapshot) => {
     snapshot.forEach((childSnapshot) => {
         const task = childSnapshot.val();
         const taskKey = childSnapshot.key;
-        // Skapa en listrad för varje uppgift
-        const taskItem = document.createElement("li");
-        taskItem.id = taskKey;
-        taskItem.className = "task-item";
-        if (task.completed) {
-            taskItem.classList.add("completed");
-        }
-        taskItem.innerHTML = `
-        <h3>${task.title}</h3>
-        <p>${task.description}</p>
-        <p>Due Date: ${task.date}</p>
-        <button onclick="completeTask('${taskKey}')">Complete</button>
-        <button onclick="deleteTask('${taskKey}')">Delete</button>`;
-        // Lägg till klass för att indikera om uppgiften är nära slutdatum
-        const today = new Date();
-        const dueDate = new Date(task.date);
-        if (dueDate <= today) {
-            taskItem.classList.add("expired");
-            taskItem.innerHTML += `<span class="icon"></span>`
-        }
-        
-        // Lägg till uppgiften i listan
-        todoList.appendChild(taskItem);
+        createTaskElement(task, taskKey);
     });
 });
+
