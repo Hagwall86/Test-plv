@@ -7,7 +7,9 @@ export default function createTaskElement(task, taskKey) {
     taskItem.id = taskKey;
     taskItem.className = "task-item";
     if (task.completed) {
+        console.log('hit');
         taskItem.classList.add("completed");
+        taskItem.classList.remove("expired", "soonExpired");
     }
     taskItem.innerHTML = `
     <h3>${task.title}</h3>
@@ -18,11 +20,20 @@ export default function createTaskElement(task, taskKey) {
 
     // Lägg till klass för att indikera om uppgiften är nära slutdatum
     const today = new Date();
+    const soonDueDate = new Date(task.date);
+    soonDueDate.setDate(soonDueDate.getDate() - 1);
+
     const dueDate = new Date(task.date);
+    dueDate.setDate(dueDate.getDate() + 1);
+
     if (dueDate <= today) {
         taskItem.classList.add("expired");
         taskItem.innerHTML += `<span class="icon"></span>`;
+    } else if (soonDueDate == today) {
+        taskItem.classList.add("soonExpired");
+        taskItem.innerHTML += `<span class="icon2"></span>`;
     }
+
 
     // Lägg till uppgiften i listan
     todoList.appendChild(taskItem);

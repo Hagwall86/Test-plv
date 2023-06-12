@@ -1,22 +1,12 @@
-import config from './config.js';
-
-const apiKey = config.apiKey;
-const databaseUrl = config.databaseUrl;
-const authDomain = config.authDomain;
-const projectId = config.projectId;
-const storageBucket = config.storageBucket;
-const messagingSenderId = config.messagingSenderId;
-const appId = config.appId;
-
 // Firebase-konfiguration (hämtad från ditt Firebase-projekt)
 const firebaseConfig = {
-    apiKey: apiKey,
-    authDomain: authDomain,
-    databaseURL: databaseUrl,
-    projectId: projectId,
-    storageBucket: storageBucket,
-    messagingSenderId: messagingSenderId,
-    appId: appId,
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    databaseURL: process.env.DATABASE_URL,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID,
+    appId: process.env.APP_ID,
 };
 
 // Initialisera Firebase
