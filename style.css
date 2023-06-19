@@ -64,3 +64,87 @@ body {
     background-size: cover;
     margin-right: 5px;
 }
+
+button {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 5px;
+    font-size: 16px;
+
+}
+
+/* .complete-button {
+    background-color: #93f576;
+} */
+
+/* .edit-button {
+    background-color: #f5ea76;
+}
+
+.delete-button {
+    background-color: #f57676;
+} */
+
+.complete-button {
+    color: rgb(0, 0, 0);
+    border-radius: 5px;
+    border: 1px solid rgb(57, 57, 57);
+    background: rgb(141, 255, 141);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.3),
+        0 2px 3px rgba(0, 0, 0, 0.70);
+}
+
+.complete-button:hover {
+    cursor: pointer;
+}
+
+/* Muspekare intryckt */
+.complete-button:active {
+    background-color: rgb(28, 248, 109);
+    position: relative;
+    left: 1px;
+    top: 1px;
+}
+
+.edit-button {
+    color: rgb(0, 0, 0);
+    border-radius: 5px;
+    border: 1px solid rgb(57, 57, 57);
+    background: #f5ea76;
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.3),
+        0 2px 3px rgba(0, 0, 0, 0.70);
+}
+
+.edit-button:hover {
+    cursor: pointer;
+}
+
+
+.edit-button:active {
+    background-color: #fcee4c;
+    position: relative;
+    left: 1px;
+    top: 1px;
+}
+
+.delete-button {
+    color: rgb(0, 0, 0);
+    border-radius: 5px;
+    border: 1px solid rgb(57, 57, 57);
+    background: #f57676;
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.3),
+        0 2px 3px rgba(0, 0, 0, 0.70);
+}
+
+.delete-button:hover {
+    cursor: pointer;
+}
+
+.delete-button:active {
+    background-color: #f65858;
+    position: relative;
+    left: 1px;
+    top: 1px;
+}

@@ -8,14 +8,13 @@ export default function createTaskElement(task, taskKey) {
     taskItem.id = taskKey;
     taskItem.className = "task-item";
     if (task.completed) {
-        console.log('hit');
         taskItem.classList.add("completed");
         taskItem.classList.remove("expired", "soonExpired");
     }
     taskItem.innerHTML = `
     <h3>${task.title}</h3>
     <p>${task.description}</p>
-    <p>Due Date: ${task.date}</p>
+    <p><strong>Due Date: ${task.date}</strong></p>
     <button class="complete-button">Complete</button>
     <button class="edit-button">Edit</button>
     <button class="delete-button">Delete</button>`;
@@ -25,8 +24,6 @@ export default function createTaskElement(task, taskKey) {
     const dueDate = new Date(task.date);
     const soonDueDate = new Date(task.date);
     soonDueDate.setDate(dueDate.getDate() - 2);
-    console.log(soonDueDate);
-
     dueDate.setDate(dueDate.getDate() + 1);
 
     if (dueDate <= today) {
