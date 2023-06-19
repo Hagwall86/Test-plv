@@ -7,11 +7,11 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'
     },
-    plugins: [
-        new Dotenv({
-            path: path.resolve(__dirname, './.env')
-        })
-    ]
+    // plugins: [
+    //     new Dotenv({
+    //         path: path.resolve(__dirname, './.env')
+    //     })
+    // ]
 
 };
 
