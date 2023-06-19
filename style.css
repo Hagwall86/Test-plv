@@ -3,6 +3,7 @@ body {
     justify-content: center;
     align-items: center;
     background: radial-gradient(closest-corner, #6873ef, #fad6ff);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .container {
@@ -27,29 +28,33 @@ body {
     display: flex;
     flex-direction: column;
     margin-bottom: 0;
-    background-color: #f0f0f0;
+    background-color: #f7f3f0;
     padding: 20px;
+    box-shadow: 5px 5px 5px 0px rgba(47, 47, 47, 0.75);
+    border-radius: 10px;
 }
 
 .task-item {
-    background-color: #f0f0f0;
+    background-color: #f7f3f0;
     padding: 10px;
     margin-bottom: 10px;
     list-style-type: none;
+    box-shadow: 5px 5px 5px 0px rgba(47, 47, 47, 0.75);
+    border-radius: 10px;
+    margin-right: 30px;
+}
+
+.soonExpired {
+    background-color: #feeab3;
 }
 
 .expired {
     background-color: #ffb0b0;
 }
 
-.soonExpired {
-    background-color: #fbdf90;
-}
-
 .completed {
     background-color: #bafda5;
 }
-
 
 .task-item .icon {
     display: inline-block;
@@ -58,5 +63,4 @@ body {
     background-image: url('data:image/svg+xml, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13v6h2v-6h-2zm1 8h-2v-2h2v2z"/></svg>');
     background-size: cover;
     margin-right: 5px;
-
 }

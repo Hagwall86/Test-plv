@@ -1,5 +1,6 @@
 import deleteTask from "./deleteTask.js";
 import completeTask from "./completeTask.js";
+import editTask from "./editTask.js";
 
 // Skapa en listrad för varje uppgift
 export default function createTaskElement(task, taskKey) {
@@ -16,24 +17,24 @@ export default function createTaskElement(task, taskKey) {
     <p>${task.description}</p>
     <p>Due Date: ${task.date}</p>
     <button class="complete-button">Complete</button>
+    <button class="edit-button">Edit</button>
     <button class="delete-button">Delete</button>`;
 
     // Lägg till klass för att indikera om uppgiften är nära slutdatum
     const today = new Date();
-    const soonDueDate = new Date(task.date);
-    soonDueDate.setDate(soonDueDate.getDate() - 1);
-
     const dueDate = new Date(task.date);
+    const soonDueDate = new Date(task.date);
+    soonDueDate.setDate(dueDate.getDate() - 2);
+    console.log(soonDueDate);
+
     dueDate.setDate(dueDate.getDate() + 1);
 
     if (dueDate <= today) {
         taskItem.classList.add("expired");
-        taskItem.innerHTML += `<span class="icon"></span>`;
-    } else if (soonDueDate == today) {
+    } else if (soonDueDate <= today && today < dueDate) {
         taskItem.classList.add("soonExpired");
-        taskItem.innerHTML += `<span class="icon2"></span>`;
+        taskItem.innerHTML += `<span class="icon"></span>`;
     }
-
 
     // Lägg till uppgiften i listan
     todoList.appendChild(taskItem);
@@ -42,6 +43,12 @@ export default function createTaskElement(task, taskKey) {
     const completeButton = taskItem.querySelector(".complete-button");
     completeButton.addEventListener("click", () => {
         completeTask(taskKey);
+    });
+
+    // Lyssna på edit-knappen
+    const editButton = taskItem.querySelector(".edit-button");
+    editButton.addEventListener("click", () => {
+        editTask(taskKey);
     });
 
     // Lyssna på delete-knappen
